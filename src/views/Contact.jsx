@@ -1,10 +1,32 @@
-import React, { useContext } from "react";
+import React, { useContext, useRef } from "react";
 import { contactLinks } from "../constants";
 import { ThemeContext } from "../themeProvider";
+import emailjs from "emailjs-com";
 
 const Contact = () => {
   const theme = useContext(ThemeContext);
   const darkMode = theme.state.darkMode;
+  const form = useRef();
+
+  const sendEmail = (e) => {
+    e.preventDefault();
+    emailjs
+      .sendForm(
+        "service_msb166f", // replace with your EmailJS Service ID
+        "template_cfzpvmw", // replace with your EmailJS Template ID
+        form.current,
+        "7Z_VZSaBlm67WLj9r" // replace with your EmailJS Public Key
+      )
+      .then(
+        (result) => {
+          alert("Message sent successfully!");
+        },
+        (error) => {
+          alert("Failed to send message. Please try again.");
+        }
+      );
+  };
+
   return (
     <div
       id="contact"
@@ -30,7 +52,7 @@ const Contact = () => {
         </div>
         <div className="flex justify-between items-center md:items-stretch  flex-col md:flex-row pb-24">
           <div className="w-full md:pr-8">
-            <form>
+            <form ref={form} onSubmit={sendEmail}>
               <div class="my-6">
                 <label
                   for="name"
@@ -43,8 +65,9 @@ const Contact = () => {
                   Name
                 </label>
                 <input
-                  type="email"
+                  type="text"
                   id="name"
+                  name="name"
                   class="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500"
                   placeholder="Enter your name"
                   required
@@ -64,6 +87,7 @@ const Contact = () => {
                 <input
                   type="email"
                   id="email"
+                  name="email"
                   class="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500"
                   placeholder="Enter your email"
                   required
@@ -82,6 +106,7 @@ const Contact = () => {
                 </label>
                 <textarea
                   id="message"
+                  name="message"
                   class="bg-gray-50 border border-gray-300 text-gray-900 h-28 w-full text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500"
                   placeholder="Enter your message"
                   required

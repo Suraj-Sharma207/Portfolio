@@ -4,9 +4,14 @@
   "private": true,
   "homepage": "https://suraj-sharma207.github.io/Portfolio",
   "dependencies": {
+    "emailjs-com": "^3.2.0",
+    "framer-motion": "^12.23.12",
+    "hamburger-react": "^2.5.2",
     "react": "^18.2.0",
     "react-dom": "^18.2.0",
     "react-scripts": "5.0.1",
+    "react-scroll": "^1.9.3",
+    "react-typical": "^0.1.3",
     "web-vitals": "^2.1.4"
   },
   "scripts": {
