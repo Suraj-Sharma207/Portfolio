@@ -72,3 +72,4 @@ export const serviceData = [
 
 
 ]
+export const resumeLink = "/Portfolio/resume.pdf";
